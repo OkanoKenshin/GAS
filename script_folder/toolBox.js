@@ -1,14 +1,13 @@
-class ToolBox{
-  getSheet(sheetName){
-      let spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-      return spreadsheet.getSheetByName(sheetName);
-    }
+class ToolBox {
+  getSheet(sheetName) {
+    let spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+    return spreadsheet.getSheetByName(sheetName);
+  }
   nullChecker(targetToCheck) {
     if (targetToCheck) {
-      Logger.log("nullChecker >>" + targetToCheck.getName() + " 取得成功")
-    }
-    else {
-      Logger.log("nullChecker >>" + targetToCheck.getName() + " 取得失敗")
+      Logger.log("nullChecker >>" + targetToCheck.getName() + " 取得成功");
+    } else {
+      Logger.log("nullChecker >>" + targetToCheck.getName() + " 取得失敗");
     }
   }
   /**
@@ -20,25 +19,18 @@ class ToolBox{
    * @param {number} option - 取得するデータを選択。0は指定した範囲のRangeを、1は指定した範囲のValuesを返す。
    * @return {range} 指定シートの指定行の3行目から999行目までを返す。
    */
-    gettingSheetData(sheetName, column, startRow = 3, endRow = 999,option = 0) {
-      if(option === 0){
-        let sheet = sheetName;
-        return sheet.getRange(`${column}${startRow}:${column}${endRow}`);
-      }
-      else if(option === 1){
-        let sheet = sheetNamesheet.getRange(`${column}${startRow}:${column}${endRow}`)
-        let values = sheet.getValues();
-        return values;
-      }
-  } 
-
-  
+  gettingRange(sheetVariable, column, startRow = 3, endRow = 999) {
+    let sheet = sheetVariable;
+    return sheet.getRange(`${column}${startRow}:${column}${endRow}`);
+  }
   /**
    * 引数で受け取った値が空「""」だった場合、Trueを返す。
    */
-    emptyChecker(targetToCheck) {
+  emptyChecker(targetToCheck) {
     if (targetToCheck === "") {
       return true;
+    } else {
+      return Logger.log(`${targetToCheck}はNullです。`);
     }
   }
 
@@ -49,9 +41,9 @@ class ToolBox{
    * @param {number} iterCount - forループのループ回数を記録しているiteraterをセット。
    * @param {number} editColumn - 取得したい列のアルファベット。Aは1と対応。Bは2、Cは3と対応。
    */
-    getRowOtherItems(sourceSheet, sourceRange, iterCount, editColumn,) {
+  getRowOtherItems(sourceSheet, sourceRange, iterCount, editColumn) {
     let countColumn = sourceRange.getRow() + iterCount;
-    let checkedCell = sourceSheet.getRange(countColumn, editColumn)
+    let checkedCell = sourceSheet.getRange(countColumn, editColumn);
     return checkedCell;
   }
 }
